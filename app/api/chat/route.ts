@@ -15,7 +15,9 @@ export async function POST(req: NextRequest) {
   const stream = new ReadableStream({
     async start(controller) {
       const send = (event: string, data: string) => {
-        controller.enqueue(encoder.encode(`event: ${event}\ndata: ${data}\n\n`))
+        // SSE 스펙: 줄바꿈이 포함된 데이터는 여러 data: 라인으로 분리해야 함
+        const dataLines = data.split('\n').map(line => `data: ${line}`).join('\n')
+        controller.enqueue(encoder.encode(`event: ${event}\n${dataLines}\n\n`))
       }
 
       try {

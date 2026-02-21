@@ -162,11 +162,12 @@ export default function Home() {
         for (const block of blocks) {
           const lines = block.split('\n')
           let event = ''
-          let data = ''
+          const dataLines: string[] = []
           for (const line of lines) {
             if (line.startsWith('event: ')) event = line.slice(7).trim()
-            else if (line.startsWith('data: ')) data = line.slice(6)
+            else if (line.startsWith('data: ')) dataLines.push(line.slice(6))
           }
+          const data = dataLines.join('\n')
           if (event === 'agent') {
             selectedAgent = data as AgentKey
             setStreamingAgent(selectedAgent)
