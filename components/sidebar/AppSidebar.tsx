@@ -97,8 +97,8 @@ export function AppSidebar({
         </div>
       </ScrollArea>
 
-      {/* API Key footer */}
-      <div className="p-4 border-t border-zinc-800">
+      {/* API Key + footer */}
+      <div className="p-4 border-t border-zinc-800 space-y-2">
         <button
           onClick={onChangeApiKey}
           className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300 transition-colors text-left"
@@ -106,6 +106,9 @@ export function AppSidebar({
           <span className="text-base">🔑</span>
           <span className="truncate">{maskedKey}</span>
         </button>
+        <p className="text-center text-[10px] text-zinc-700 tracking-widest uppercase select-none">
+          Powered by HYUNGWOON
+        </p>
       </div>
     </div>
   )

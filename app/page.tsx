@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import { AppSidebar } from '@/components/sidebar/AppSidebar'
 import { ChatArea } from '@/components/chat/ChatArea'
 import { OnboardingModal } from '@/components/onboarding/OnboardingModal'
@@ -25,6 +25,7 @@ export default function Home() {
   const [streamingAgent, setStreamingAgent] = useState<AgentKey | null>(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [showKeyConfirm, setShowKeyConfirm] = useState(false)
+  const abortControllerRef = useRef<AbortController | null>(null)
 
   useEffect(() => {
     const key = getApiKey()
@@ -79,6 +80,10 @@ export default function Home() {
     setShowOnboarding(true)
   }
 
+  function handleStop() {
+    abortControllerRef.current?.abort()
+  }
+
   async function generateTitle(convId: string, userMsg: string, assistantMsg: string, key: string) {
     try {
       const res = await fetch('/api/generate-title', {
@@ -121,6 +126,11 @@ export default function Home() {
     setStreamingContent('')
     setStreamingAgent(null)
 
+    const controller = new AbortController()
+    abortControllerRef.current = controller
+
+    let selectedAgent: AgentKey | null = null
+
     const history = (currentConversation?.messages ?? []).map(m => ({
       role: m.role,
       content: m.content,
@@ -131,6 +141,7 @@ export default function Home() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey },
         body: JSON.stringify({ message: text, history, attachments }),
+        signal: controller.signal,
       })
 
       if (!res.body) throw new Error('No response body')
@@ -138,7 +149,6 @@ export default function Home() {
       const reader = res.body.getReader()
       const decoder = new TextDecoder()
       let fullContent = ''
-      let selectedAgent: AgentKey | null = null
       let buffer = ''
 
       while (true) {
@@ -177,16 +187,23 @@ export default function Home() {
       if (isFirstMessage && fullContent) {
         generateTitle(convId, text, fullContent, apiKey)
       }
-    } catch (err) {
-      console.error('Chat error:', err)
-      updateLastAssistantMessage(convId, '오류가 발생했습니다. 다시 시도해주세요.', [])
+    } catch (err: unknown) {
+      if (err instanceof Error && err.name === 'AbortError') {
+        // 사용자가 중단 — 지금까지 스트리밍된 내용 저장
+        const currentContent = streamingContent
+        updateLastAssistantMessage(convId, currentContent || '_(응답이 중단됐습니다)_', selectedAgent ? [selectedAgent] : [])
+      } else {
+        console.error('Chat error:', err)
+        updateLastAssistantMessage(convId, '오류가 발생했습니다. 다시 시도해주세요.', [])
+      }
       setConversations(getAllConversations())
     } finally {
+      abortControllerRef.current = null
       setIsLoading(false)
       setStreamingContent('')
       setStreamingAgent(null)
     }
-  }, [apiKey, isLoading, currentConvId, currentConversation])
+  }, [apiKey, isLoading, currentConvId, currentConversation, streamingContent])
 
   return (
     <div className="flex h-screen bg-zinc-950 text-white overflow-hidden">
@@ -266,6 +283,7 @@ export default function Home() {
               streamingContent={streamingContent}
               streamingAgent={streamingAgent}
               onSend={handleSend}
+              onStop={handleStop}
             />
           </main>
         </>

@@ -12,9 +12,10 @@ interface Props {
   streamingContent: string
   streamingAgent: AgentKey | null
   onSend: (message: string, attachments: Attachment[]) => void
+  onStop: () => void
 }
 
-export function ChatArea({ messages, isLoading, streamingContent, streamingAgent, onSend }: Props) {
+export function ChatArea({ messages, isLoading, streamingContent, streamingAgent, onSend, onStop }: Props) {
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -70,7 +71,7 @@ export function ChatArea({ messages, isLoading, streamingContent, streamingAgent
       </ScrollArea>
 
       {/* Input */}
-      <InputBar onSend={onSend} isLoading={isLoading} />
+      <InputBar onSend={onSend} onStop={onStop} isLoading={isLoading} />
     </div>
   )
 }

@@ -7,12 +7,13 @@ import type { Attachment } from '@/lib/types'
 
 interface Props {
   onSend: (message: string, attachments: Attachment[]) => void
+  onStop: () => void
   isLoading: boolean
 }
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024 // 5MB
 
-export function InputBar({ onSend, isLoading }: Props) {
+export function InputBar({ onSend, onStop, isLoading }: Props) {
   const [text, setText] = useState('')
   const [attachments, setAttachments] = useState<Attachment[]>([])
   const fileRef = useRef<HTMLInputElement>(null)
@@ -106,19 +107,27 @@ export function InputBar({ onSend, isLoading }: Props) {
           }}
         />
 
-        <Button
-          onClick={handleSend}
-          disabled={!text.trim() || isLoading}
-          className="flex-shrink-0 w-9 h-9 p-0 bg-blue-600 hover:bg-blue-500 disabled:opacity-30 rounded-lg mb-0.5"
-        >
-          {isLoading ? (
-            <span className="text-xs">●</span>
-          ) : (
+        {isLoading ? (
+          <button
+            onClick={onStop}
+            className="flex-shrink-0 w-9 h-9 flex items-center justify-center bg-zinc-700 hover:bg-zinc-600 rounded-lg mb-0.5 transition-colors cursor-pointer"
+            title="응답 중단"
+          >
+            <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+              <rect x="6" y="6" width="12" height="12" rx="2" />
+            </svg>
+          </button>
+        ) : (
+          <Button
+            onClick={handleSend}
+            disabled={!text.trim()}
+            className="flex-shrink-0 w-9 h-9 p-0 bg-blue-600 hover:bg-blue-500 disabled:opacity-30 rounded-lg mb-0.5"
+          >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
             </svg>
-          )}
-        </Button>
+          </Button>
+        )}
       </div>
       <p className="text-xs text-zinc-600 text-center">AI 답변은 참고용입니다. 중요한 결정은 전문가와 상담하세요.</p>
     </div>
