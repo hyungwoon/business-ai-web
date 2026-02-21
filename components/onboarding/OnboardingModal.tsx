@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { setApiKey } from '@/lib/storage/conversations'
@@ -70,7 +71,9 @@ export function OnboardingModal({ onComplete }: Props) {
           {step === 'intro' && (
             <div className="space-y-6">
               <div className="text-center space-y-3">
-                <div className="text-5xl">🤖</div>
+                <div className="flex justify-center">
+                  <Image src="/logo.png" alt="Business AI Team" width={72} height={72} className="rounded-xl" />
+                </div>
                 <h1 className="text-2xl font-bold text-white">Business AI Team</h1>
                 <p className="text-zinc-400 text-sm leading-relaxed">
                   마케팅, 재무, 법무, HR 등 16개 AI 전문가 팀이<br />

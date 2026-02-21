@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { deleteConversation } from '@/lib/storage/conversations'
@@ -50,6 +51,7 @@ export function AppSidebar({
       {/* Header */}
       <div className="p-4 border-b border-zinc-800">
         <div className="flex items-center gap-2 mb-4">
+          <Image src="/logo.png" alt="Business AI Team" width={32} height={32} className="rounded-md" />
           <span className="text-lg font-bold text-white">Business AI</span>
         </div>
         <Button
