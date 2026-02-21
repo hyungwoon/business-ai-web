@@ -1,3 +1,5 @@
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { AgentBadge } from './AgentBadge'
 import type { Message, AgentKey } from '@/lib/types'
 
@@ -48,18 +50,64 @@ export function MessageItem({ message, streamingContent }: Props) {
 
         {/* Message bubble */}
         <div
-          className={`rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
+          className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
             isUser
-              ? 'bg-blue-600 text-white rounded-br-sm'
+              ? 'bg-blue-600 text-white rounded-br-sm whitespace-pre-wrap'
               : 'bg-zinc-800 text-zinc-100 rounded-bl-sm'
           }`}
         >
-          {content || (
+          {!content && !isUser ? (
             <span className="inline-flex gap-1">
               <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
               <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
               <span className="w-1.5 h-1.5 bg-zinc-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
             </span>
+          ) : isUser ? (
+            content
+          ) : (
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              components={{
+                h1: ({ children }) => <h1 className="text-lg font-bold mt-3 mb-1 first:mt-0">{children}</h1>,
+                h2: ({ children }) => <h2 className="text-base font-bold mt-3 mb-1 first:mt-0">{children}</h2>,
+                h3: ({ children }) => <h3 className="text-sm font-bold mt-2 mb-1 first:mt-0">{children}</h3>,
+                p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
+                ul: ({ children }) => <ul className="list-disc list-inside mb-2 space-y-1">{children}</ul>,
+                ol: ({ children }) => <ol className="list-decimal list-inside mb-2 space-y-1">{children}</ol>,
+                li: ({ children }) => <li className="text-zinc-100">{children}</li>,
+                strong: ({ children }) => <strong className="font-semibold text-white">{children}</strong>,
+                em: ({ children }) => <em className="italic text-zinc-300">{children}</em>,
+                code: ({ children, className }) => {
+                  const isBlock = className?.includes('language-')
+                  return isBlock ? (
+                    <code className="block bg-zinc-900 rounded-lg p-3 my-2 text-xs font-mono text-zinc-200 overflow-x-auto whitespace-pre">
+                      {children}
+                    </code>
+                  ) : (
+                    <code className="bg-zinc-900 rounded px-1.5 py-0.5 text-xs font-mono text-zinc-200">{children}</code>
+                  )
+                },
+                pre: ({ children }) => <pre className="my-2">{children}</pre>,
+                blockquote: ({ children }) => (
+                  <blockquote className="border-l-2 border-zinc-500 pl-3 my-2 text-zinc-400 italic">{children}</blockquote>
+                ),
+                table: ({ children }) => (
+                  <div className="overflow-x-auto my-2">
+                    <table className="text-xs border-collapse w-full">{children}</table>
+                  </div>
+                ),
+                th: ({ children }) => <th className="border border-zinc-600 px-2 py-1 bg-zinc-700 font-semibold text-left">{children}</th>,
+                td: ({ children }) => <td className="border border-zinc-600 px-2 py-1">{children}</td>,
+                a: ({ href, children }) => (
+                  <a href={href} target="_blank" rel="noopener noreferrer" className="text-blue-400 underline hover:text-blue-300">
+                    {children}
+                  </a>
+                ),
+                hr: () => <hr className="border-zinc-600 my-3" />,
+              }}
+            >
+              {content}
+            </ReactMarkdown>
           )}
         </div>
       </div>
