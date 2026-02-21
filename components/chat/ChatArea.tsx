@@ -24,6 +24,11 @@ export function ChatArea({ messages, isLoading, streamingContent, streamingAgent
 
   const isEmpty = messages.length === 0 && !isLoading
 
+  // 로딩 중엔 마지막 빈 assistant 플레이스홀더를 제외 (스트리밍 버블이 대신 표시)
+  const displayMessages = isLoading
+    ? messages.slice(0, -1)
+    : messages
+
   return (
     <div className="flex flex-col h-full bg-zinc-950">
       {/* Messages */}
@@ -48,7 +53,7 @@ export function ChatArea({ messages, isLoading, streamingContent, streamingAgent
             </div>
           )}
 
-          {messages.map(msg => (
+          {displayMessages.map(msg => (
             <MessageItem key={msg.id} message={msg} />
           ))}
 
