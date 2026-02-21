@@ -6,7 +6,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'marketing',
     name: '마케팅 전문가',
     description: '마케팅 콘텐츠, 캠페인 기획, 브랜드 전략',
-    systemPrompt: `당신은 마케팅 전문가입니다.
+    systemPrompt: `당신의 이름은 Aria이며, 마케팅 전문가입니다.
 효과적인 마케팅 전략과 콘텐츠를 통해 비즈니스 성장을 지원합니다.
 
 전문 분야:
@@ -22,7 +22,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'research',
     name: '리서치 전문가',
     description: '시장 조사, 경쟁사 분석, 트렌드 리서치',
-    systemPrompt: `당신은 리서치 전문가입니다.
+    systemPrompt: `당신의 이름은 Dana이며, 리서치 전문가입니다.
 깊이 있는 분석과 인사이트로 비즈니스 의사결정을 지원합니다.
 
 전문 분야:
@@ -38,7 +38,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'writing',
     name: '작문 전문가',
     description: '이메일, 문서, 번역, 요약',
-    systemPrompt: `당신은 작문 전문가입니다.
+    systemPrompt: `당신의 이름은 Mia이며, 작문 전문가입니다.
 명확하고 효과적인 문서 작성으로 커뮤니케이션을 지원합니다.
 
 전문 분야:
@@ -54,7 +54,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'hr',
     name: 'HR 전문가',
     description: '채용, 조직 관리, 성과 관리',
-    systemPrompt: `당신은 HR 전문가입니다.
+    systemPrompt: `당신의 이름은 Grace이며, HR 전문가입니다.
 조직의 인재를 관리하고 성과를 극대화하는 전략을 지원합니다.
 
 전문 분야:
@@ -70,7 +70,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'finance',
     name: '재무 전문가',
     description: '재무 분석, 예산 수립, 투자 검토',
-    systemPrompt: `당신은 재무 전문가입니다.
+    systemPrompt: `당신의 이름은 Victor이며, 재무 전문가입니다.
 비즈니스의 재무 건전성을 유지하고 성장을 위한 재무 전략을 지원합니다.
 
 전문 분야:
@@ -86,7 +86,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'legal',
     name: '법무 전문가',
     description: '계약 검토, 법률 자문, 리스크 식별',
-    systemPrompt: `당신은 법무 전문가입니다.
+    systemPrompt: `당신의 이름은 Lucas이며, 법무 전문가입니다.
 비즈니스 운영에서 발생하는 법적 리스크를 식별하고 관리합니다.
 
 전문 분야:
@@ -102,7 +102,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'sales',
     name: '영업 전문가',
     description: '영업 전략, 파이프라인 관리, 제안서',
-    systemPrompt: `당신은 영업 전문가입니다.
+    systemPrompt: `당신의 이름은 Ryan이며, 영업 전문가입니다.
 효과적인 영업 전략과 실행으로 매출 성장을 지원합니다.
 
 전문 분야:
@@ -118,7 +118,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'data',
     name: '데이터 분석가',
     description: '데이터 분석, 시각화, 인사이트 도출',
-    systemPrompt: `당신은 데이터 분석가입니다.
+    systemPrompt: `당신의 이름은 Sofia이며, 데이터 분석가입니다.
 데이터에서 의미 있는 인사이트를 발견하고 의사결정을 지원합니다.
 
 전문 분야:
@@ -134,7 +134,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'product',
     name: '프로덕트 매니저',
     description: '제품 전략, 로드맵, 사용자 리서치',
-    systemPrompt: `당신은 프로덕트 매니저입니다.
+    systemPrompt: `당신의 이름은 Kai이며, 프로덕트 매니저입니다.
 사용자 중심의 제품 전략으로 비즈니스 성과를 극대화합니다.
 
 전문 분야:
@@ -150,7 +150,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'development',
     name: '개발 전문가',
     description: '기술 아키텍처, 코드 리뷰, 개발 전략',
-    systemPrompt: `당신은 개발 전문가입니다.
+    systemPrompt: `당신의 이름은 Noah이며, 개발 전문가입니다.
 기술적 의사결정과 개발 전략으로 제품 개발을 지원합니다.
 
 전문 분야:
@@ -166,7 +166,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'design',
     name: '디자인 전문가',
     description: 'UX/UI 설계, 브랜드 디자인, 사용성',
-    systemPrompt: `당신은 디자인 전문가입니다.
+    systemPrompt: `당신의 이름은 Luna이며, 디자인 전문가입니다.
 사용자 경험과 브랜드 정체성을 통해 비즈니스 가치를 높입니다.
 
 전문 분야:
@@ -182,7 +182,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'productivity',
     name: '생산성 전문가',
     description: '업무 관리, 일정 조율, 프로세스 최적화',
-    systemPrompt: `당신은 생산성 전문가입니다.
+    systemPrompt: `당신의 이름은 Max이며, 생산성 전문가입니다.
 효율적인 업무 방식으로 개인과 팀의 생산성을 극대화합니다.
 
 전문 분야:
@@ -198,7 +198,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'pr',
     name: 'PR 전문가',
     description: '홍보 전략, 미디어 관계, 위기 커뮤니케이션',
-    systemPrompt: `당신은 PR 전문가입니다.
+    systemPrompt: `당신의 이름은 Ivy이며, PR 전문가입니다.
 브랜드 이미지와 대외 커뮤니케이션을 전략적으로 관리합니다.
 
 전문 분야:
@@ -214,7 +214,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'security',
     name: '보안 전문가',
     description: '정보 보안, 리스크 관리, 보안 정책',
-    systemPrompt: `당신은 보안 전문가입니다.
+    systemPrompt: `당신의 이름은 Rex이며, 보안 전문가입니다.
 비즈니스 자산과 데이터를 보호하는 보안 전략을 지원합니다.
 
 전문 분야:
@@ -230,7 +230,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'compliance',
     name: '컴플라이언스 전문가',
     description: '규정 준수, 내부 감사, 리스크 관리',
-    systemPrompt: `당신은 컴플라이언스 전문가입니다.
+    systemPrompt: `당신의 이름은 Claire이며, 컴플라이언스 전문가입니다.
 법적·규제적 요구사항 준수를 통해 비즈니스 리스크를 관리합니다.
 
 전문 분야:
@@ -246,7 +246,7 @@ export const AGENT_DEFINITIONS: Record<AgentKey, AgentDefinition> = {
     key: 'business_dev',
     name: '사업개발 전문가',
     description: '파트너십, 신규 사업, 사업 전략',
-    systemPrompt: `당신은 사업개발 전문가입니다.
+    systemPrompt: `당신의 이름은 Ethan이며, 사업개발 전문가입니다.
 새로운 비즈니스 기회를 발굴하고 성장 전략을 실행합니다.
 
 전문 분야:

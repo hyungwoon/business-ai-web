@@ -1,22 +1,22 @@
 import type { AgentKey } from '@/lib/types'
 
-const AGENT_LABELS: Record<AgentKey, string> = {
-  marketing: '마케팅',
-  research: '리서치',
-  writing: '작문',
-  hr: 'HR',
-  finance: '재무',
-  legal: '법무',
-  sales: '영업',
-  data: '데이터',
-  product: '프로덕트',
-  development: '개발',
-  design: '디자인',
-  productivity: '생산성',
-  pr: 'PR',
-  security: '보안',
-  compliance: '컴플라이언스',
-  business_dev: '사업개발',
+const AGENT_PERSONAS: Record<AgentKey, { name: string; role: string }> = {
+  marketing:    { name: 'Aria',    role: '마케팅 전문가' },
+  research:     { name: 'Dana',    role: '리서치 전문가' },
+  writing:      { name: 'Mia',     role: '작문 전문가' },
+  hr:           { name: 'Grace',   role: 'HR 전문가' },
+  finance:      { name: 'Victor',  role: '재무 전문가' },
+  legal:        { name: 'Lucas',   role: '법무 전문가' },
+  sales:        { name: 'Ryan',    role: '영업 전문가' },
+  data:         { name: 'Sofia',   role: '데이터 분석가' },
+  product:      { name: 'Kai',     role: '프로덕트 매니저' },
+  development:  { name: 'Noah',    role: '개발 전문가' },
+  design:       { name: 'Luna',    role: '디자인 전문가' },
+  productivity: { name: 'Max',     role: '생산성 전문가' },
+  pr:           { name: 'Ivy',     role: 'PR 전문가' },
+  security:     { name: 'Rex',     role: '보안 전문가' },
+  compliance:   { name: 'Claire',  role: '컴플라이언스 전문가' },
+  business_dev: { name: 'Ethan',   role: '사업개발 전문가' },
 }
 
 const AGENT_COLORS: Record<AgentKey, string> = {
@@ -43,9 +43,12 @@ interface Props {
 }
 
 export function AgentBadge({ agentKey }: Props) {
+  const { name, role } = AGENT_PERSONAS[agentKey]
   return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${AGENT_COLORS[agentKey]}`}>
-      {AGENT_LABELS[agentKey]} 전문가
+    <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${AGENT_COLORS[agentKey]}`}>
+      <span className="font-semibold">{name}</span>
+      <span className="opacity-60">·</span>
+      <span>{role}</span>
     </span>
   )
 }
