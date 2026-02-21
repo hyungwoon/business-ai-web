@@ -1,6 +1,6 @@
 // lib/storage/conversations.ts
 import { v4 as uuidv4 } from 'uuid'
-import type { Conversation, Message, ConversationStore } from '@/lib/types'
+import type { Conversation, Message, ConversationStore, AgentKey } from '@/lib/types'
 
 const STORAGE_KEY = 'biz_conversations'
 const API_KEY_STORAGE = 'biz_api_key'
@@ -94,7 +94,7 @@ export function updateLastAssistantMessage(
   const lastMsg = [...conv.messages].reverse().find(m => m.role === 'assistant')
   if (lastMsg) {
     lastMsg.content = content
-    lastMsg.agentsUsed = agentsUsed as any
+    lastMsg.agentsUsed = agentsUsed as AgentKey[]
   }
   saveStore(store)
 }

@@ -1,6 +1,7 @@
 // lib/agents/orchestrator.ts
 import Anthropic from '@anthropic-ai/sdk'
 import { AGENT_DEFINITIONS, AGENT_KEYS } from './definitions'
+import { buildSkillsForAgent } from './skills-loader'
 import type { AgentKey, Attachment } from '@/lib/types'
 
 const ORCHESTRATOR_SYSTEM_PROMPT = `당신은 사업가의 개인 비서이자 전문가 팀의 리더입니다.
@@ -95,10 +96,15 @@ export async function* streamAgentResponse(
 
   userContent.push({ type: 'text', text: message })
 
+  const skills = buildSkillsForAgent(agentKey)
+  const systemPrompt = skills
+    ? `${agent.systemPrompt}\n\n# 전문 지식 프레임워크\n\n${skills}`
+    : agent.systemPrompt
+
   const stream = await client.messages.stream({
     model: 'claude-sonnet-4-6',
     max_tokens: 4096,
-    system: agent.systemPrompt,
+    system: systemPrompt,
     messages: [
       ...history.slice(-20),
       { role: 'user', content: userContent },
