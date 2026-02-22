@@ -31,21 +31,21 @@ function loadAllSkills(pluginName: string): string {
 /** Agent → [plugin names] mapping (mirrors Python agent plugin_names) */
 const AGENT_PLUGIN_MAP: Record<string, string[]> = {
   marketing: ['marketing'],
-  research: ['enterprise-search'],
-  writing: ['productivity'],
+  research: ['marketing', 'sales', 'data'],
+  writing: ['marketing', 'sales', 'customer-support'],
   hr: ['hr', 'productivity'],
   finance: ['finance', 'data'],
   legal: ['legal', 'enterprise-search'],
   sales: ['sales'],
   data: ['data'],
-  product: ['product'],
-  development: ['development', 'data'],
+  product: ['product-management', 'marketing'],
+  development: ['development', 'data', 'cowork-plugin-management'],
   design: ['design', 'marketing'],
   productivity: ['productivity'],
   pr: ['pr', 'marketing'],
   security: ['security', 'data'],
   compliance: ['compliance', 'data'],
-  business_dev: ['business-dev'],
+  business_dev: ['business-dev', 'marketing', 'sales'],
 }
 
 /** Build skills context string for an agent */
