@@ -20,7 +20,7 @@ No test suite is currently configured.
 
 ## Architecture
 
-This is a **Next.js 15 (App Router) + TypeScript** business AI assistant. The user provides their own Anthropic API key, stored in `localStorage`. All conversations are also persisted in `localStorage` (no backend database).
+This is a **Next.js 16 (App Router) + TypeScript** business AI assistant. The user provides their own Anthropic API key, stored in `localStorage`. All conversations are also persisted in `localStorage` (no backend database).
 
 ### Request Flow
 
@@ -48,7 +48,7 @@ The client (`page.tsx`) reconstructs multi-line deltas by joining `data:` lines 
 
 ### Plugin System (`plugins/`)
 
-Each plugin directory has a `skills/` subdirectory with one folder per skill, each containing a `SKILL.md`. The `SKILL.md` may have YAML frontmatter (stripped at load time). Available plugins: `business-dev`, `compliance`, `customer-support`, `data`, `design`, `development`, `enterprise-search`, `finance`, `hr`, `legal`, `marketing`, `pr`, `product`, `productivity`, `sales`, `security`.
+Each plugin directory has a `skills/` subdirectory with one folder per skill, each containing a `SKILL.md`. The `SKILL.md` may have YAML frontmatter (stripped at load time). Available plugins: `business-dev`, `compliance`, `customer-support`, `data`, `design`, `development`, `enterprise-search`, `finance`, `hr`, `legal`, `marketing`, `pr`, `product-management`, `productivity`, `sales`, `security`.
 
 ### Storage (`lib/storage/conversations.ts`)
 
